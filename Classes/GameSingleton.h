@@ -1,9 +1,7 @@
 //
 //  GameSingleton.h
-//  flickit
-//
+//  Klink
 //  Created by My Mac on 20/06/2010.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
 
@@ -67,7 +65,5 @@ CCLabel *player_2_scores_lbl[10];
 int current_player;
 bool game_in_progress;
 bool autostart;
-
-
 
 @end
