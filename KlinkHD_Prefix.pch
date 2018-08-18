@@ -1,5 +1,5 @@
 //
-// Prefix header for all source files of the 'flickit' target in the 'flickit' project
+// Prefix header for all source files of the 'Klink' target in the 'Klink' project
 //
 
 #ifdef __OBJC__
