@@ -1,6 +1,6 @@
 //
-// Menu Demo
-// a cocos2d example
+// Main Menu
+// 
 
 
 #import "Menu.h"
