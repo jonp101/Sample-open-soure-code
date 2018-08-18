@@ -10,13 +10,10 @@
 
 #import "GameLayers.h"
 #import "Global.h"
-//#import "GameSingleton.h"
-
-
-
 
 // This section for consts and enums...
 // This is the space the game is played in..
+
 cpSpace *space;
 cpBody *staticBody;
 int balls_per_round = 5;
@@ -61,47 +58,26 @@ enum {
 
 
 
-
-
-
-
-// functions from other files vrought in via magic / C
+// functions from other files brought in via magic / C
 extern void drawObject(void *ptr, void *unused);
 
 
 static int
 BeginColl(cpArbiter *arb, cpSpace *space, void *ignore)
 {
-	/*CP_ARBITER_GET_SHAPES(arb, a, b);
-	 OneWayPlatform *platform = (OneWayPlatform *)a->data;
-	 
-	 if(cpvdot(cpArbiterGetNormal(arb, 0), platform->n) < 0){
-	 cpArbiterIgnore(arb);
-	 return 0;
-	 }*/
-	//[[SimpleAudioEngine sharedEngine] playEffect:@"clank.wav"];
-	//wall_collide = true;
 	return 1;
 }
 
 static void
 Seperate(cpArbiter *arb, cpSpace *space, void *ignore)
 {
-	/*CP_ARBITER_GET_SHAPES(arb, a, b);
-	 OneWayPlatform *platform = (OneWayPlatform *)a->data;
-	 
-	 if(cpvdot(cpArbiterGetNormal(arb, 0), platform->n) < 0){
-	 cpArbiterIgnore(arb);
-	 return 0;
-	 }*/
-	//wall_collide = false;
-	//return 1;
+	
 }
 
 static int
 BeginCollc(cpArbiter *arb, cpSpace *space, void *ignore)
 {
-	CP_ARBITER_GET_SHAPES(arb, a, b);
+    CP_ARBITER_GET_SHAPES(arb, a, b);
     cpVect va;
     cpVect vb;
     va = a->body->v;
@@ -112,21 +88,15 @@ BeginCollc(cpArbiter *arb, cpSpace *space, void *ignore)
     // 1000 = hard
     if (Length > 1 ) {
 		if (sound_on) {
-			//[[SimpleAudioEngine sharedEngine] playEffect:@"clink.wav"];
 			[[SimpleAudioEngine sharedEngine] playEffect:@"clink.wav" pitch:1.8 pan:1 gain:(0.001*Length)];
 		}
-    }
-	
-	
-	
-	return 1;
+    }	
+    return 1;
 }
-
 
 static void
 Seperatec(cpArbiter *arb, cpSpace *space, void *ignore)
 {
-	//
 }
 
 static void eachShape(void *ptr, void* unused)
@@ -134,15 +104,9 @@ static void eachShape(void *ptr, void* unused)
 	cpShape *shape = (cpShape*) ptr;
 	CCSprite *sprite = shape->data;
 	
-	
-	
 	// for slate and mahogony then color coin yellow in bed, no need to change sprite
 	if( sprite ) {
-		cpBody *body = shape->body;
-		
-		
-		
-		
+		cpBody *body = shape->body;		
 		if (board == 2) {
 			for ( int i = 1 ; i <= current_ball_no; i++)
 			{
@@ -155,9 +119,7 @@ static void eachShape(void *ptr, void* unused)
 					else {
 						shape->data = ball_sprites[i];
 						[ball_sprites2[i] setPosition:ccp(-1000*i,-10000)];
-						
 					}
-
 				}
 			}
 			sprite = shape->data;
@@ -165,10 +127,7 @@ static void eachShape(void *ptr, void* unused)
 		else{
 			// colour the ball if it stopped in a bed for slate and mahogany coins.
 			for ( int i = 1 ; i <= current_ball_no; i++)
-			{
-				
-				
-				
+			{		
 				if ( body == balls[i] )
 				{
 					ccColor3B yellow = {255,255,0};
@@ -209,47 +168,14 @@ static void eachShape(void *ptr, void* unused)
 			
 		}
 		
-		
-		// add out info button at the top..
-		// Standard method to create a button
-		/*if ( board != 2 )
-		{
-			CCMenuItem *infoMenuItem = [CCMenuItemImage 
-										itemFromNormalImage:@"iwhitedup.png" selectedImage:@"iwhitedown.png" 
-										target:self selector:@selector(menuCallbackQuit:)];
-			infoMenuItem.position = ccp(300, 460);
-			CCMenu *infoMenu = [CCMenu menuWithItems:infoMenuItem, nil];
-			infoMenu.position = CGPointZero;
-			[self addChild:infoMenu z:3];
-		}*/
-		//else {
-	/*		CCMenuItem *infoMenuItem = [CCMenuItemImage 
-										itemFromNormalImage:@"iup.png" selectedImage:@"idown.png" 
-										target:self selector:@selector(menuCallbackQuit:)];
-			infoMenuItem.position = ccp(303, 459);
-			CCMenu *infoMenu = [CCMenu menuWithItems:infoMenuItem, nil];
-			infoMenu.position = CGPointZero;
-		    infoMenu.opacity = 180;
-			[self addChild:infoMenu z:3];*/
-			
-		//}
-		
-		
 		CCMenuItem *infoMenuItem = [CCMenuItemImage 
-									itemFromNormalImage:@"iup.png" selectedImage:@"idown.png" 
-									target:self selector:@selector(menuCallbackQuit:)];
+		itemFromNormalImage:@"iup.png" selectedImage:@"idown.png" 
+		target:self selector:@selector(menuCallbackQuit:)];
 		infoMenuItem.position = ccp(700, 980);
-		//infoMenuItem.opacity = 170;
 		CCMenu *infoMenu = [CCMenu menuWithItems:infoMenuItem, nil];
 		infoMenu.position = CGPointZero;
 		infoMenu.opacity = 170;
-		[self addChild:infoMenu z:3];
-		
-		
-		
-		
-		
-		
+		[self addChild:infoMenu z:3];		
 		self.isTouchEnabled = YES;
 		
 		// Set up the chipmunk space..
@@ -269,7 +195,6 @@ static void eachShape(void *ptr, void* unused)
 		{
 			CCSprite *bg = [CCSprite spriteWithFile:@"board mahogany.png"];
 			CGPoint point = CGPointMake(384,512);
-			//bg.opacity = 100;
 			[bg setPosition:point];
 			[self addChild:bg z:0];
 		}
@@ -277,7 +202,6 @@ static void eachShape(void *ptr, void* unused)
 		{
 			CCSprite *bg = [CCSprite spriteWithFile:@"board slate.png"];
 			CGPoint point = CGPointMake(384,512);
-			//bg.opacity = 100;
 			[bg setPosition:point];
 			[self addChild:bg z:0];
 		}
@@ -295,7 +219,7 @@ static void eachShape(void *ptr, void* unused)
 		current_ball_no = 1;
 		current_score = 0;    
 		total_pen = 0;
-	    new_coin = true;
+	        new_coin = true;
 		current_ball_no = 1;
 		//Initial gamestate is flick coin.
 		gamestate = coin_toflick;
@@ -327,22 +251,6 @@ static void eachShape(void *ptr, void* unused)
 		}
 		
 		
-		
-		
-		// new game so we have a clap from the audience
-		// not needed anymore after meeting... just init the lib
-		
-		
-		
-		// Draw the fireing boundary line ( its done as a sprite )
-		// DEBUG get rid of this line for now
-		/*
-		 CCSprite *fline = [CCSprite spriteWithFile:@"line.png"];
-		 CGPoint pointline = CGPointMake(160,100);
-		 [fline setPosition:pointline];
-		 [self addChild:fline z:1];
-		 */
-		
 		CGSize wins = [[CCDirector sharedDirector] winSize];
 		
 		if ( board == 0 )
@@ -369,13 +277,7 @@ static void eachShape(void *ptr, void* unused)
 				balls[i] = [self addSpriteNamed:@"funkycoin.png" x:wins.width/2-i*1000 y:-7000.0f type: 0 coin_no : i]; 		
 			}
 		}
-		
-		// set mass
-		for ( int i = 1; i < 6 ; i++)
-		{
-			//cpBodySetMass(balls[i], 5);
-		}
-		
+			
 		//Initialize boundaries
 		[self createBoundingBox];
 		
@@ -383,8 +285,7 @@ static void eachShape(void *ptr, void* unused)
 		cpSpaceAddCollisionHandler(space, 0, 1, BeginColl, NULL, NULL, Seperate, NULL);
 		// Set up collision handle for coin on coin 
 		cpSpaceAddCollisionHandler(space, 0, 0, BeginCollc, NULL, NULL, Seperatec, NULL);
-		
-		
+				
 		// Display player Names
 		NSString *Player_label;
 		Player_label = Player1;
@@ -392,8 +293,7 @@ static void eachShape(void *ptr, void* unused)
 		if (two_player ) {
 			player_label = [CCLabel labelWithString:Player_label dimensions:CGSizeMake(720,50) alignment:UITextAlignmentLeft fontName:@"Chalkboard"	fontSize:42];
 			if ( board == 0 || board == 2 )
-				player_label.color = ccc3(0,0,0);
-			
+				player_label.color = ccc3(0,0,0);			
 			//player_label = [CCLabel labelWithString:Player_label fontName:@"Marker Felt" fontSize:20]; 
 			[player_label setPosition:ccp(384,37)];
 			[self addChild:player_label z:3];
@@ -405,8 +305,7 @@ static void eachShape(void *ptr, void* unused)
 		// feature to retrieve the state of the game..
 		[self Load_Game_State];
 		[self display_scores];
-		
-		
+				
 		if ( !two_player)
 		{
 			NSString* displaystr = [NSString stringWithFormat:@"Practice Score %d", total_pen];
@@ -415,12 +314,9 @@ static void eachShape(void *ptr, void* unused)
 			{
 				[self removeChild:ypos cleanup:YES];
 			}
-			
-			
+						
 			ypos = [CCLabel labelWithString:displaystr fontName:@"Chalkboard" fontSize:28];
-			
-			
-			
+					
 			if ( board != 1 )
 				ypos.color = ccc3(0,0,0);
 			
@@ -428,27 +324,16 @@ static void eachShape(void *ptr, void* unused)
 			[ypos setPosition: ccp(384, 1024-140)];
 		}
 		
-		
-		
+			
 		// Set up timing loop...
 		[self schedule: @selector(step:)];
-		
-		
+				
 	}
 	return self;
 	
 }
 
-/*- (void) draw{
- // rendering loop
- glColor4f(1.0, 1.0, 1.0, 1.0);
- cpSpaceHashEach(space->activeShapes, &drawObject, NULL);
- 
- //by switching colour here we can make static stuff darker
- glColor4f(1.0, 1.0, 1.0, 0.7);
- cpSpaceHashEach(space->staticShapes, &drawObject, NULL);
- 
- }*/
+
 
 -(void) game_logic
 {
@@ -479,9 +364,7 @@ static void eachShape(void *ptr, void* unused)
 				if ( current_ball_no < balls_per_round )
 					CoinResult = [self Coin_StoppedCheck: true : 0: i];
 				else
-					CoinResult = [self Coin_StoppedCheck: true : 0: i];
-				
-				
+					CoinResult = [self Coin_StoppedCheck: true : 0: i];				
 				
 				if (CoinResult != Ball_moving)
 				{
@@ -576,9 +459,7 @@ static void eachShape(void *ptr, void* unused)
 						player2_scores[i] = player2_scores_temp[i];
 					}
 					score_this_round = after - before;
-					[self display_scores];
-					
-					
+					[self display_scores];					
 					
 					if ( score_this_round > 1)
 					{
@@ -627,7 +508,7 @@ static void eachShape(void *ptr, void* unused)
 						
 						
 						[wellDone setPosition:ccp(384,512)];
-					     wellDone.scale = 0.8f;
+					        wellDone.scale = 0.8f;
 						
 						 //wellDone.color = ccc3(255,0,0);
 						if (board == 0) 
@@ -648,8 +529,7 @@ static void eachShape(void *ptr, void* unused)
 						
 						[wellDone runAction:action];
 						
-						[self addChild: wellDone z:3];
-						
+						[self addChild: wellDone z:3];						
 					}
 					
 					
@@ -741,17 +621,8 @@ static void eachShape(void *ptr, void* unused)
  					    [menu runAction:[CCSequence actions:actionCent,nil]]; 
 					}
 					
-					/*for( CCNode *child in [menu children] ) {
-						[child runAction: 
-						 [CCEaseElasticOut actionWithAction:
-						  [CCScaleTo actionWithDuration:2 scale:2]
-													 period: 0.35f]
-						 ];
-					}*/
-					
 					[self addChild: menu];
-					
-					
+							
 				}
 				menu_shown = true;
 			}
@@ -1319,18 +1190,13 @@ static void eachShape(void *ptr, void* unused)
 	{
 		// stop the coin 
 		balls[ball_no] -> v.y = 0.0;
-		balls[ball_no] -> v.x = 0.0;
-		
-		
-		
+		balls[ball_no] -> v.x = 0.0;		
 		
 		ball = ball_no-1;
 		the_result = Ball_out_of_bed_stopped;
 		// ball has stopped, so notify
 		int myInt = balls[ball_no] -> p.y + 0.5;
-		
-		
-		
+				
 		
 		int high[9] = {0,0,0,0,0,0,0,0,0};
 		int low[9]  = {0,0,0,0,0,0,0,0,0};
@@ -1352,12 +1218,11 @@ static void eachShape(void *ptr, void* unused)
 			{
 				high[i] = m_calibrate_h[i];
 				low[i]  = m_calibrate_l[i];
-			}
-			
+			}			
 		}
 		
 		
-		// Now Determin if the coin landed in a bed
+		// Now Determine if the coin landed in a bed
 		if (myInt >= low[0] && myInt <= high[0] )
 		{
 			the_result = Ball_in_bed_1_stopped;
@@ -1434,8 +1299,6 @@ static void eachShape(void *ptr, void* unused)
 }
 
 
-
-
 // New Game go to splash screen.
 -(void) menuCallbackNew:(id) sender
 {
@@ -1446,7 +1309,7 @@ static void eachShape(void *ptr, void* unused)
 	
 }
 
-// new ba;;
+// new ball
 -(void) menuCallbackTap:(id) sender
 {
 	score_this_round = 0;
@@ -1549,7 +1412,6 @@ static void eachShape(void *ptr, void* unused)
 	
 	cpSpaceAddBody(space, body);
 	
-	
 	balls_shapes[coin_no] = cpCircleShapeNew(body, [image size].width / 2, cpvzero);
 	
 	balls_shapes[coin_no]->data = ball_sprites[coin_no];
@@ -1621,9 +1483,7 @@ static void eachShape(void *ptr, void* unused)
 			squareShape->e = 1.0f; squareShape->u = 1.0f;
 			squareShape->collision_type = 1;
 			cpSpaceAddStaticShape(space, squareShape);		
-			
-			
-			
+						
 			// segment 5
 			squared[0] = ccp (384,wins.height+2000);
 			squared[1] = ccp (768-259,wins.height+2000);
@@ -1634,8 +1494,7 @@ static void eachShape(void *ptr, void* unused)
 			squareShape->e = 1.0f; squareShape->u = 1.0f;
 			squareShape->collision_type = 1;
 			cpSpaceAddStaticShape(space, squareShape);		
-			
-			
+						
 			// segment 6
 			squared[0] = ccp (768-259,wins.height+2000);
 			squared[1] = ccp (768-223,wins.height+2000);
@@ -1682,12 +1541,9 @@ static void eachShape(void *ptr, void* unused)
 			squareShape->e = 1.0f; squareShape->u = 1.0f;
 			squareShape->collision_type = 1;
 			cpSpaceAddStaticShape(space, squareShape);	
-			
-			
+						
 			// bottom left bottom
-			
-			
-			
+						
 			squared[0] = ccp (-4000,wins.height);
 			squared[1] = ccp (0,wins.height);
 			squared[2] = ccp (0,-4000);
@@ -1696,9 +1552,7 @@ static void eachShape(void *ptr, void* unused)
 			squareShape = cpPolyShapeNew(staticBody, 4, squared, cpv(0,0));
 			squareShape->e = 1.0f; squareShape->u = 1.0f;
 			squareShape->collision_type = 1;
-			cpSpaceAddStaticShape(space, squareShape);
-			
-			
+			cpSpaceAddStaticShape(space, squareShape);			
 			
 			// Bottom Right top 
 			
@@ -1725,9 +1579,7 @@ static void eachShape(void *ptr, void* unused)
 			squareShape->e = 1.0f; squareShape->u = 1.0f;
 			squareShape->collision_type = 1;
 			cpSpaceAddStaticShape(space, squareShape);	
-			
-			
-			
+				
 			// finally the bottom boundary
 			squared[0] = ccp (-2000,0);
 			squared[1] = ccp (wins.width+2000,0);
@@ -1741,7 +1593,7 @@ static void eachShape(void *ptr, void* unused)
 			
 		}
 			
-			break;
+		break;
 		case 1:
 		{
 			// top is split into 8 segments 
@@ -1895,8 +1747,7 @@ static void eachShape(void *ptr, void* unused)
 			squareShape->collision_type = 1;
 			cpSpaceAddStaticShape(space, squareShape);	
 			
-			
-			
+					
 			// finally the bottom boundary
 			squared[0] = ccp (-2000,0);
 			squared[1] = ccp (wins.width+2000,0);
@@ -1906,11 +1757,9 @@ static void eachShape(void *ptr, void* unused)
 			squareShape = cpPolyShapeNew(staticBody, 4, squared, cpv(0,0));
 			squareShape->e = 1.0f; squareShape->u = 1.0f;
 			squareShape->collision_type = 1;
-			cpSpaceAddStaticShape(space, squareShape);	
-			
-			
+			cpSpaceAddStaticShape(space, squareShape);				
 		}
-			break;
+		break;
 		case 2:
 		{
 			// top is split into 8 segments 
@@ -2199,9 +2048,6 @@ static void eachShape(void *ptr, void* unused)
 }
 
 // Save the game state...
-
-
-
 // load up the saved game state so we can resume where we left off.
 
 -(void) Save_Game_State;
@@ -2235,16 +2081,11 @@ static void eachShape(void *ptr, void* unused)
 	}
 	
 	dataFile = [dataFile stringByAppendingString: two_player_type ];
-	
-	
-	
-	
-	
+		
 	NSMutableData *datastream;
 	NSKeyedArchiver *encoder;
 	datastream = [NSMutableData data];
 	encoder = [[NSKeyedArchiver alloc] initForWritingWithMutableData:datastream]; 
-	
 	
 	
 	// Game Variables here...
@@ -2304,16 +2145,10 @@ static void eachShape(void *ptr, void* unused)
 		// set labels to nil...
 	}
 	
-	[encoder encodeInt:current_player forKey: @"current_player"];
-	
-	
-	
+	[encoder encodeInt:current_player forKey: @"current_player"];	
 	[encoder finishEncoding ];
-	[datastream writeToFile:dataFile atomically:TRUE];
-	
-	[encoder release];
-	
-	
+	[datastream writeToFile:dataFile atomically:TRUE];	
+	[encoder release];	
 }
 
 -(void) Load_Game_State
@@ -2819,9 +2654,6 @@ static void eachShape(void *ptr, void* unused)
 	}
 	
 }
-
-
-
 
 
 @end
