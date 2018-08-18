@@ -1,6 +1,5 @@
 //
 //  GameLayers.m
-//  temp_test
 //
 //  Created by J Walker on 09/05/2010.
 //  Copyright 2010 test. All rights reserved.
