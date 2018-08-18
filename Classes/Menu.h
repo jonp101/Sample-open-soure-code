@@ -3,8 +3,6 @@
 #import "Global.h"
 #import "PlayHaven.h"
 
-
-
 @class CCMenu;
 
 //CLASS INTERFACE
@@ -13,10 +11,6 @@
 	UIWindow *window;
 }
 @end
-
-
-
-
 
 @interface ConfigLayer : CCLayer  < UITextFieldDelegate >
 {
@@ -28,9 +22,6 @@
 -(void) menuCallback: (id) sender;
 -(void) backCallback: (id) sender;
 @end
-
-
-
 
 @interface AboutLayer : CCLayer <PHRequestDelegate>  // implement the Playhaven delegate
 {
