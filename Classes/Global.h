@@ -1,9 +1,8 @@
 //
 //  Global.h
-//  flickit
+//  Klink
 //
 //  Created by J Walker on 14/05/2010.
-//  Copyright 2010 test. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -13,9 +12,6 @@
 #import "cocos2d.h"
 #import "chipmunk.h"
 #import "cpMouse.h"
-
-
-
 
 @interface Global : NSObject {
 
@@ -55,7 +51,7 @@ CCScene *theScene;  //menu Scene..
 CCScene *gs;        //game Scene..
 CCScene *cs;        //config Scene..
 CCScene *hs;        //history scene..
-CCScene *as;		 //about scene..
+CCScene *as;	    //about scene..
 CCScene *hp;        //how to play scene..
 CCScene *sl;        //splash layer..
 
