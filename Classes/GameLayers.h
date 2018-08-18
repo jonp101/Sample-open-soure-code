@@ -1,13 +1,8 @@
 //
 //  GameLayers.h
-//  temp_test
-//
 //  Created by J Walker on 09/05/2010.
 //  Copyright 2010 test. All rights reserved.
 //
-
-//#import "cocos2d.h"
-
 #include "GameSingleton.h"
 
 
@@ -31,8 +26,6 @@
 -(void) Delete_Game_State;
 -(void) display_scores;
 -(void) addCheatButtons;
-
-
 
 @end
 
