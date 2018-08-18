@@ -1,24 +1,17 @@
 //
 // Menu Demo
 // a cocos2d example
-// http://www.cocos2d-iphone.org
-//
 
 
 #import "Menu.h"
 #import "GameLayers.h"
 #import "GameSingleton.h"
 
-
-
-
 enum {
 	kTagMenu = 1,
 	kTagMenu0 = 0,
 	kTagMenu1 = 1,
 };
-
-
 
 #pragma mark -
 #pragma mark MainMenu
@@ -308,7 +301,7 @@ enum {
 	[CCMenuItemFont setFontName: @"Chalkboard"];
 	[CCMenuItemFont setFontSize:38];
 	CCMenuItemFont *title_pl2 = [CCMenuItemFont itemFromString: @"Player 2"];
-    [title_pl2 setIsEnabled:NO];
+        [title_pl2 setIsEnabled:NO];
 	
 	
 	
@@ -322,10 +315,10 @@ enum {
 	[CCMenuItemFont setFontName: @"Chalkboard"];
 	[CCMenuItemFont setFontSize:38];
 	CCMenuItemFont *title_md = [CCMenuItemFont itemFromString: @"Game Mode"];
-    [title_md setIsEnabled:NO];
+        [title_md setIsEnabled:NO];
 	[CCMenuItemFont setFontName: @"Chalkboard"];
 	[CCMenuItemFont setFontSize:42];
-    CCMenuItemToggle *item_md = [CCMenuItemToggle itemWithTarget:self selector:@selector(menuCallbackMD:) items:
+        CCMenuItemToggle *item_md = [CCMenuItemToggle itemWithTarget:self selector:@selector(menuCallbackMD:) items:
 								 [CCMenuItemFont itemFromString: @"Practice"],
 								 [CCMenuItemFont itemFromString: @"2 Player"],
 								 nil];
@@ -343,10 +336,10 @@ enum {
 	[CCMenuItemFont setFontName: @"Chalkboard"];
 	[CCMenuItemFont setFontSize:38];
 	CCMenuItemFont *title1 = [CCMenuItemFont itemFromString: @"Sound"];
-    [title1 setIsEnabled:NO];
+        [title1 setIsEnabled:NO];
 	[CCMenuItemFont setFontName: @"Chalkboard"];
 	[CCMenuItemFont setFontSize:42];
-    CCMenuItemToggle *item1 = [CCMenuItemToggle itemWithTarget:self selector:@selector(menuCallbackSD:) items:
+        CCMenuItemToggle *item1 = [CCMenuItemToggle itemWithTarget:self selector:@selector(menuCallbackSD:) items:
 							   [CCMenuItemFont itemFromString: @"On"],
 							   [CCMenuItemFont itemFromString: @"Off"],
 							   nil];
@@ -366,8 +359,8 @@ enum {
 	CCMenuItemFont *title4 = [CCMenuItemFont itemFromString: @"Choose Board"];
     [title4 setIsEnabled:NO];
 	
-	[CCMenuItemFont setFontName: @"Chalkboard"];
-	[CCMenuItemFont setFontSize:42];
+    [CCMenuItemFont setFontName: @"Chalkboard"];
+    [CCMenuItemFont setFontSize:42];
     CCMenuItemToggle *item4 = [CCMenuItemToggle itemWithTarget:self selector:@selector(menuCallback:) items:
 							   [CCMenuItemFont itemFromString: @"Mahogany"],
 							   [CCMenuItemFont itemFromString: @"Slate"],
@@ -388,12 +381,7 @@ enum {
 					title1, item1,
 					title4, item4, nil]; // 9 items.
     [menu  alignItemsVertically];
-    
-	
-	
-	[self addChild: menu z:1];
-	
-	
+    [self addChild: menu z:1];	
 }
 
 -(id) init
@@ -413,18 +401,14 @@ enum {
 	//[menu alignItemsVertically];
 	[menu1 setPosition:ccp(384,55)];
 	
-	[self addChild: menu1 z:1];	
-	
-	
-	
+	[self addChild: menu1 z:1];		
 	// add a background
 	
 	//
 	bg = [CCSprite spriteWithFile:@"options_screen.png"];
 	CGPoint point = CGPointMake(384,512);
 	[bg setPosition:point];
-	[self addChild:bg z:0];
-	
+	[self addChild:bg z:0];	
 	return self;
 }
 
@@ -444,9 +428,9 @@ enum {
 {
 	
 	UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:@"Enter Player 1 Name"
-													 message:@"Enter name for Player 1"
-													delegate:self cancelButtonTitle:@"Cancel"
-										   otherButtonTitles:@"OK", nil];
+										message:@"Enter name for Player 1"
+									        delegate:self cancelButtonTitle:@"Cancel"
+										otherButtonTitles:@"OK", nil];
 	myTextField = [[UITextField alloc] initWithFrame:CGRectMake(12, 45, 260, 25)];
 	myTextField.keyboardType = UIKeyboardTypeASCIICapable;
 	myTextField.keyboardAppearance = UIKeyboardAppearanceAlert;
@@ -575,8 +559,8 @@ enum {
 {
 	
 	UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:@"Enter Player 2 Name"
-													 message:@"Enter name for Player 2"
-													delegate:self cancelButtonTitle:@"Cancel"
+										   message:@"Enter name for Player 2"
+										   delegate:self cancelButtonTitle:@"Cancel"
 										   otherButtonTitles:@"OK", nil];
 	myTextField = [[UITextField alloc] initWithFrame:CGRectMake(12, 45, 260, 25)];
 	myTextField.keyboardType = UIKeyboardTypeASCIICapable;
@@ -759,21 +743,11 @@ enum {
 	
 	CCMenu *menu2 = [CCMenu menuWithItems: item2, nil];
 	//[menu alignItemsVertically];
-	[menu2 setPosition:CGPointZero];
-	
-	
-	
-	
-	
+	[menu2 setPosition:CGPointZero];	
 	[self addChild: menu];
-	[self addChild: menu2];
-	
+	[self addChild: menu2];	
 	return self;
-
-
 }
-
-
 
 -(void) menuCallback: (id) sender
 {
@@ -790,45 +764,31 @@ enum {
 	//[[CCDirector sharedDirector] replaceScene: [CCFlipYTransition transitionWithDuration:1.0f scene:theScene ]];
 }
 
-
-
 // playhaven delegate methods
 
 -(void)playhaven:(UIView *)view didLoadWithContext:(id)contextValue {
 	[[[CCDirector sharedDirector] openGLView] addSubview:view];
 }
-
 -(void)playhaven:(UIView *)view didFailWithError:(NSString *)message context:(id)contextValue {
 	//NSLog(@"playhaven didFailWithError: %@", message);
 	[view removeFromSuperview];
 }
-
 -(void)playhaven:(UIView *)view wasDismissedWithContext:(id)contextValue {
 	[view removeFromSuperview];
 }
-
-
 @end
-
 @implementation HistoryLayer
-
 -(id) init
 {
-	self = [super init];
-	
+	self = [super init];	
 	if( (self=[super init])) {
 		CCSprite *titlesprite = [CCSprite spriteWithFile:@"scoreboard-1.png"];
 		[self addChild:titlesprite z:0];
 		[titlesprite setPosition:CGPointMake(384,512)];
-	}
-	
-	
+	}	
 	CCLabel* title = [CCLabel labelWithString:[NSString stringWithFormat:@"Score history for %@", Player1] fontName:@"Chalkboard" fontSize:50];
 	[title setPosition:ccp(384,970)];
-	[self addChild:title];
-	
-	
-	
+	[self addChild:title];	
 	// load high score table from nsdefaults...
 	struct penalty_score_entry structArray[10];				
 	NSUserDefaults *userPreferences = [NSUserDefaults standardUserDefaults];	
@@ -840,10 +800,7 @@ enum {
 			structArray[i].PenaltyScore = [userPreferences integerForKey:[NSString stringWithFormat:@"highScoreEntry%d", i]];
 			ii = i;
 		}
-	}
-	
-	
-	
+	}	
 	int ystart = 780;
 	for (int i=0; i <= ii; i++) {
 		
@@ -852,20 +809,14 @@ enum {
 		[self addChild:test];
 		CCLabel *score_lbl = [CCLabel labelWithString:[NSString stringWithFormat:@"%d",structArray[i].PenaltyScore] dimensions:CGSizeMake(300,50) alignment:UITextAlignmentRight fontName:@"Chalkboard" fontSize:42]; 
 		[score_lbl setPosition:ccp(400,ystart)];
-		[self addChild:score_lbl];
-		
+		[self addChild:score_lbl];		
 		ystart -= 66;
-	}
-	
-	
-	
+	}	
 	// back to menu
 	[CCMenuItemFont setFontSize:50];
 	[CCMenuItemFont setFontName: @"Chalkboard"];
 	//CCMenuItem *item4 = [CCMenuItemFont itemFromString: @"I toggle enable items" target: self selector:@selector(menuCallbackEnable:)];
-	CCMenuItem *item1 = [CCMenuItemFont itemFromString: @"Back" target: self selector:@selector(menuCallback:)];
-	
-	
+	CCMenuItem *item1 = [CCMenuItemFont itemFromString: @"Back" target: self selector:@selector(menuCallback:)];	
 	CCMenu *menu = [CCMenu menuWithItems: item1, nil];
 	//[menu alignItemsVertically];
 	[menu setPosition:ccp(384,50)];
@@ -884,7 +835,6 @@ enum {
 
 
 @end
-
 @implementation HowToPlayLayer
 
 -(id) init
@@ -906,10 +856,8 @@ enum {
 	
 	CCMenu *menu = [CCMenu menuWithItems: item1, nil];
 	//[menu alignItemsVertically];
-	[menu setPosition:ccp(384,50)];
-	
-	[self addChild: menu];
-	
+	[menu setPosition:ccp(384,50)];	
+	[self addChild: menu];	
 	return self;
 	
 }
@@ -922,9 +870,6 @@ enum {
 }
 
 @end
-
-
-
 // CLASS IMPLEMENTATIONS
 @implementation AppController
 
@@ -941,14 +886,11 @@ enum {
 	game_in_progress = FALSE;
 	autostart = false;
 	// initialize sound engine
-	//[[SimpleAudioEngine sharedEngine] init ];
-	
-	
-	
+	//[[SimpleAudioEngine sharedEngine] init ];	
 	// get user preferences.
 	NSUserDefaults *userPreferences = [NSUserDefaults standardUserDefaults];
 	
-    if ([userPreferences stringForKey:  @"SoundOnOff"] != nil) {
+        if ([userPreferences stringForKey:  @"SoundOnOff"] != nil) {
 	  NSString *comp = [userPreferences stringForKey:  @"SoundOnOff"];
 	  if ([comp isEqualToString:@"Y"]) {
 		  sound_on = true;
